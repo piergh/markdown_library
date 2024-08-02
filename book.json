@@ -1,3 +1,5 @@
 {
-    "root": "./library"
+    "root": "./library",
+    "title": "Markdown Library - ",
+    "author": "Public Information & Elucidiation Repository"
 }

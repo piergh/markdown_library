@@ -1,0 +1,38 @@
+name: 'deploy website and ebooks'
+
+on:
+  push:
+    tags:
+      - ['release-[0-9]{8}\.[0-9]{2}']
+
+jobs:
+  job_build_ebooks:
+    name: 'build ebooks'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: 'Installing honkit'
+      run: npm install -g honkit
+    - name: 'Installing calibre'
+      run: |
+        sudo -v
+        wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+    - name: 'Preparing for ebooks generations'
+      run: |
+        mkdir _book
+    - name: 'Generating ebook in pdf'
+      run: npx honkit pdf ./ ./_book/pier-markdown-library_${{env.GITHUB_REF_NAME}}.pdf
+    - name: 'Generating ebook in epub'
+      run: npx honkit epub ./ ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.epub
+    - name: 'Generating ebook in mobi'
+      run: npx honkit mobi ./ ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.mobi
+    - name: Release 
+        uses: softprops/action-gh-release@v2
+        with: 
+          files: |
+            ./_book/pier-markdown-library_${{env.GITHUB_REF_NAME}}.pdf
+            ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.epub
+            ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.mobi

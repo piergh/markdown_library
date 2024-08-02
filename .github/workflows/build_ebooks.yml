@@ -1,4 +1,4 @@
-name: 'deploy website and ebooks'
+name: 'build and create release for ebooks'
 
 on:
   push:

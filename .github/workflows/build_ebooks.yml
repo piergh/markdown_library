@@ -30,9 +30,9 @@ jobs:
     - name: 'Generating ebook in mobi'
       run: npx honkit mobi ./ ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.mobi
     - name: Release 
-        uses: softprops/action-gh-release@v2
-        with: 
-          files: |
-            ./_book/pier-markdown-library_${{env.GITHUB_REF_NAME}}.pdf
-            ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.epub
-            ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.mobi
+      uses: softprops/action-gh-release@v2
+      with: 
+        files: |
+          ./_book/pier-markdown-library_${{env.GITHUB_REF_NAME}}.pdf
+          ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.epub
+          ./_book/pier-markdown-library${{env.GITHUB_REF_NAME}}.mobi

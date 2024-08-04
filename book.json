@@ -1,5 +1,6 @@
 {
     "root": "./library",
     "title": "Markdown Library - ",
-    "author": "Public Information & Elucidiation Repository"
+    "author": "Public Information & Elucidiation Repository",
+    "plugins": ["mermaid-md-adoc"]
 }
